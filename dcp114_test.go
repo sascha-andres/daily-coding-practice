@@ -1,45 +1,30 @@
-package dcp114
+package daily_coding_practice
 
 import (
-	"fmt"
 	"testing"
 )
 
-func TestNoSplit(t *testing.T) {
-	const input = "hello"
-	const output = "hello"
-	const separators = ":/"
-	runTest(input, separators, output, t)
+var testCases114 = [][]string{
+	{"hello", "hello", ":/"},
+	{"hello/world:here", "here/world:hello", ":/"},
+	{"hello/world:here/", "here/world:hello/", ":/"},
+	{"hello//world:here", "here/world/:hello", ":/"},
+	{"//", "//", ":/"},
+	{"", "", ":/"},
 }
 
-func TestHelloWorldHere(t *testing.T) {
-	const input = "hello/world:here"
-	const output = "here/world:hello"
-	const separators = ":/"
-	runTest(input, separators, output, t)
-}
-
-func TestTrailingDeliminator(t *testing.T) {
-	const input = "hello/world:here/"
-	const output = "here/world:hello/"
-	const separators = ":/"
-	runTest(input, separators, output, t)
-}
-
-func TestEmptyValue(t *testing.T) {
-	const input = "hello//world:here/"
-	const output = "here/world/:hello/"
-	const separators = ":/"
-	runTest(input, separators, output, t)
+func TestTable(t *testing.T) {
+	for _, val := range testCases114 {
+		runTest114(val[0], val[2], val[1], t)
+	}
 }
 
 /////////////////////////////////////////////////////////////////
 
-func runTest(input string, separators string, output string, t *testing.T) {
-	fmt.Printf("input := %s - output := %s separators := %s\n", input, output, separators)
+func runTest114(input string, separators string, output string, t *testing.T) {
 	result := Run(input, separators)
-	fmt.Println(result)
 	if result != output {
+		t.Logf("got '%s', expected '%s' for '%s' with separators '%s'", result, output, input, separators)
 		t.Fail()
 	}
 }

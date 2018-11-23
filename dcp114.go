@@ -1,4 +1,4 @@
-package dcp114
+package daily_coding_practice
 
 import (
 	"strings"
