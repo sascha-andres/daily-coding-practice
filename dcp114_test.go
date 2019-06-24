@@ -13,7 +13,7 @@ var testCases114 = [][]string{
 	{"", "", ":/"},
 }
 
-func TestTable(t *testing.T) {
+func Test114(t *testing.T) {
 	for _, val := range testCases114 {
 		runTest114(val[0], val[2], val[1], t)
 	}
